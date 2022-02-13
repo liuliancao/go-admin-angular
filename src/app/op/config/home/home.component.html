@@ -1,0 +1,94 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.config.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.config.home.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+    <div class="da-content-banner-title">
+      配置列表
+    </div>
+    <div>请选择对应的配置或者添加和编辑</div>
+  </div>
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24,24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-list-container" dLoading [loading]="busy">
+          <d-button (btnClick)="openCreateConfigDialog()">创建配置</d-button>
+          <div class="da-list-content">
+            <d-data-table
+              #datatable
+              [dataSource]="listData"
+              [borderType]="'normal'"
+              [size]="'normal'"
+              [scrollable]="true">
+              <d-column field="ID" header="ID">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="namespace" header="Namespace">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="m_type" header="MType">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+
+              <d-column field="name" header="Name">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="key" header="Key">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="value" header="Value">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="description" header="Description">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="created_by" header="创建人">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+            </d-data-table>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

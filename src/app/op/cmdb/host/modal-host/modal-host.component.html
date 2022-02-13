@@ -1,0 +1,31 @@
+<hr style="opacity: 0.5;">
+<da-layout-row [daGutter]="[0, 0]" class="host-details">
+  <da-col-item [daStyle]="{ width: '800px', height: '300px'}">
+    <table cellspacing="10">
+      <tbody>
+        <tr>
+          <td><span class="table-label">SN号:</span> {{data.host.id }}</td>
+          <td><span class="table-label">IP:</span> {{ data.host.ip }}</td>
+        </tr>
+        <tr>
+          <td><span class="table-label">主机名:</span> {{ data.host.hostname }}</td>
+          <td><span class="table-label">机房:</span> {{ data.host.htype }}</td>
+        </tr>
+        <tr>
+          <td><span class="table-label">操作系统:</span> {{ data.host.os }}</td>
+          <td><span class="table-label">内核版本:</span> {{ data.host.extras.kernel }}</td>
+        </tr>
+        <tr>
+          <td><span class="table-label">产品:</span><span *ngFor="let product of data.host.products"><a href="/cmdb/product/{{product.id}}">{{ product.name }}</a></span></td>
+          <td><span class="table-label">应用:</span><span *ngFor="let app of data.host.apps"><a href="/cmdb/service/{{app.id}}">{{ app.name }}</a></span></td>
+        </tr>
+        <tr>
+          <td><span class="table-label">集群:</span><span *ngFor="let cluster of data.host.clusters"><a href="/cmdb/cluster/{{cluster.id}}">{{ cluster.name }}</a>&nbsp;&nbsp;</span></td>
+        </tr>
+        <tr>
+          <td><span class="table-label">描述:</span> {{ data.host.description || "暂无" }}{{data.host.cids}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </da-col-item>
+</da-layout-row>

@@ -1,0 +1,50 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '700px', height: '500px'}">
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto"
+    >
+      <d-form-item>
+        <d-form-label [required]="true">集群名称</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="name"
+            placeholder="请输入集群名称"
+            [(ngModel)]="data.name" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">所属服务</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="ServiceOptions"
+            [(ngModel)]="data.service"
+            [multiple]="false"
+            [name]="'product'"
+            placeholder="请选择所属服务"
+            [filterKey]="'name'"
+            [allowClear]="true"
+            [isSearch]="true"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">描述信息</d-form-label>
+        <d-form-control>
+          <textarea
+            dTextarea
+            name="description"
+            [(ngModel)]="data.description"
+            placeholder="集群描述信息"
+            >
+            </textarea>
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

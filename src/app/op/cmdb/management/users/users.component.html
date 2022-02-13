@@ -1,0 +1,66 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.user.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+    <div class="da-content-banner-title">
+      {{ "dashboard.cmdb.manage.user.basicList.title" | translate }}
+    </div>
+    <div>{{ "dashboard.cmdb.manage.user.basicList.description" | translate }}</div>
+  </div>
+
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24,24]">
+      <da-col-item [daSpan]="10" [daXs]="2">
+        <d-button (btnClick)="openCreateDepartmentDialog()">创建部门</d-button>
+      </da-col-item>
+      <da-col-item [daSpan]="10" [daXs]="10">
+        <d-button (btnClick)="openCreateUserDialog()">创建用户</d-button>
+      </da-col-item>
+    </da-layout-row>
+
+    <da-layout-row [daGutter]="[12, 12]">
+      <da-col-item [daSpan]="12" [daXs]="12">
+        <div class="da-list-container">
+          <div class="da-list-content">
+            <d-card *ngFor="let user of userList" class="card-item">
+              <a href="/cmdb/user/{{ user.id }}">
+                <d-card-header>
+                  <d-avatar
+                    dCardAvatar
+                    [name]="user.username"
+                    [round]="true"
+                    width="28"
+                    height="28">
+                  </d-avatar>
+                  <d-card-title *ngIf="user.nickname;else elseBlock">{{ user.nickname }}</d-card-title>
+                  <ng-template #elseBlock><d-card-title>{{ user.username }}</d-card-title></ng-template>
+                </d-card-header>
+                <d-card-content>
+                  <ul>
+                    <li>性别: {{ user.gender }}</li>
+                    <li>类型: {{ user.usertype }}</li>
+                    <li>电话: {{ user.phone }}</li>
+                    <li>邮件: {{ user.mail }}</li>
+                    <li>部门: {{ user.department }}</li>
+                  </ul>
+                </d-card-content>
+              </a>
+            </d-card>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

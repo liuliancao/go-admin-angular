@@ -1,0 +1,26 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '300px', height: '200px'}">
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto"
+    >
+      <d-form-item>
+        <d-form-label [required]="true">选择主机</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="HostOptions"
+            [(ngModel)]="data.host"
+            [multiple]="false"
+            [name]="'host'"
+            placeholder="请选择"
+            [filterKey]="'hostname'"
+            [allowClear]="true"
+            [isSearch]="true"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

@@ -1,0 +1,10 @@
+<div class="row" style="width:100%; height: 600px">
+  <div class="tools">
+    <app-bpmn-tool (onDownloadSvg)=handleDownloadSvg() (onDownloadXml)=handleDownloadXml() (onRedo)=handleRedo()
+                 (onSave)=handleSave() (onUndo)=handleUndo() (onZoomIn)=handleZoom(0.1)
+                   (onZoomOut)=handleZoom(-0.1) (onZoomReset)=handleZoom(1)></app-bpmn-tool>
+  </div>
+  <div id="el" style="float:left;width:75%;height:100%">
+  </div>
+  <div id="js-properties-panel" style="float:right;width:20%;height: 900px;overflow: scroll"></div>
+</div>

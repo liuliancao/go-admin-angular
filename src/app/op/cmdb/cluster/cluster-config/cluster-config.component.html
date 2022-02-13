@@ -1,0 +1,25 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.cluster.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.cluster.config.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+  </div>
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <h3>集群名: {{ cluster.name }}</h3>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '500px', height: '280px'}">
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto"
+    >
+      <d-form-item>
+        <d-form-label [required]="true">服务名称</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="name"
+            placeholder="请输入服务名称"
+            [(ngModel)]="data.name" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">所属环境</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="EnvOptions"
+            [(ngModel)]="data.env"
+            [multiple]="false"
+            [name]="'env'"
+            placeholder="请选择所属环境"
+            [filterKey]="'name'"
+            [allowClear]="true"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">所属产品</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="ProductOptions"
+            [(ngModel)]="data.product"
+            [multiple]="false"
+            [name]="'product'"
+            placeholder="请选择所属产品"
+            [filterKey]="'name'"
+            [allowClear]="true"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">描述信息</d-form-label>
+        <d-form-control>
+          <textarea
+            dTextarea
+            name="description"
+            resize="vertical"
+            autocomplete="off"
+            [dValidateRules]="[{ maxlength: 256 }]"
+            [(ngModel)]="data.description"
+            placeholder="服务描述信息"
+            >
+            </textarea>
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

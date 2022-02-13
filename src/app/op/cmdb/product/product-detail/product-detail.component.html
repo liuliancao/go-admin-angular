@@ -1,0 +1,74 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.product.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+  </div>
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-content-card">
+          <d-card>
+            <d-card-header>
+              <d-card-title>
+                <h3><d-avatar [name]="'Product'"></d-avatar>&nbsp;{{ product.name }}</h3>
+              </d-card-title>
+            </d-card-header>
+            <d-card-content>
+              <da-layout-row [daGutter]="[24, 24]">
+                <da-col-item [daSpan]="18" [daXs]="18">
+                  {{ product.description }}
+                </da-col-item>
+                <da-col-item [daSpan]="20" [daXs]="6">
+                  负责人:
+                  <d-avatar
+                    *ngFor="let user of userList"
+                    dCardAvatar
+                    [name]="user.username"
+                    [customText]="user.username"
+                    [isRound]="true"
+                    >
+                  </d-avatar>
+                  <d-button (btnClick)="openBindProductUserDialog()">添加负责人</d-button>
+                </da-col-item>
+              </da-layout-row>
+
+              <h3>产品包含的服务</h3>
+              <da-col-item [daSpan]="24" [daXs]="24">
+                <div class="da-list-container">
+                  <div class="da-list-content">
+                    <d-card *ngFor="let app of appList" class="card-item">
+                      <a href="/cmdb/service/{{ app.ID }}">
+                        <d-card-header>
+                          <d-avatar
+                            dCardAvatar
+                            [name]="app.name"
+                            [isRound]="true"
+                            width="28"
+                            height="28">
+                          </d-avatar>
+                          <d-card-title>{{ app.name }}</d-card-title>
+                        </d-card-header>
+                        <d-card-content>
+                          {{ app.description }}
+                        </d-card-content>
+                      </a>
+                    </d-card>
+                  </div>
+                </div>
+              </da-col-item>
+            </d-card-content>
+          </d-card>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

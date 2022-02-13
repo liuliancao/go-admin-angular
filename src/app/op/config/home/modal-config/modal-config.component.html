@@ -1,0 +1,84 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '700px', height: '600px'}">
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto"
+    >
+      <d-form-item>
+        <d-form-label [required]="true">作用域(namespace):</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="namespace"
+            placeholder="请输入作用域"
+            [(ngModel)]="data.namespace" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">键(key):</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="key"
+            placeholder="请输入键key"
+            [(ngModel)]="data.key" />
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">键名称(name):</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="name"
+            placeholder="请输入键key的显示名称"
+            [(ngModel)]="data.name" />
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">值(value):</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="value"
+            placeholder="请输入键key对应的值value"
+            [(ngModel)]="data.value" />
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">是否可见:</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="EncryptOptions"
+            [(ngModel)]="data.encrypt"
+            [multiple]="false"
+            [name]="'name'"
+            placeholder="请选择是否可见"
+            [filterKey]="'value'"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">描述信息(description):</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="description"
+            placeholder="请写下额外的描述信息"
+            [(ngModel)]="data.description" />
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

@@ -1,0 +1,56 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.service.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+    <div class="da-content-banner-title">
+      {{ "dashboard.cmdb.manage.service.basicList.title" | translate }}
+    </div>
+    <div>{{ "dashboard.cmdb.manage.service.basicList.description" | translate }}</div>
+  </div>
+
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24,24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <d-button (btnClick)="openCreateServiceDialog()">创建服务</d-button>
+      </da-col-item>
+    </da-layout-row>
+
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-list-container">
+          <div class="da-list-content">
+            <d-card *ngFor="let service of serviceList" class="card-item">
+              <a href="/cmdb/service/{{ service.ID }}">
+                <d-card-header>
+                  <d-avatar
+                    dCardAvatar
+                    [name]="service.name"
+                    [round]="true"
+                    width="28"
+                    height="28">
+                  </d-avatar>
+                  <d-card-title>{{ service.name }}</d-card-title>
+                </d-card-header>
+                <d-card-content>
+                  {{ service.description }}
+                </d-card-content>
+              </a>
+            </d-card>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

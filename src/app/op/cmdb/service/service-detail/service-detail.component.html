@@ -1,0 +1,77 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.service.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+  </div>
+
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-content-card">
+          <d-card>
+            <d-card-header>
+              <d-card-title>
+                <h3>{{ service.name }}</h3>
+              </d-card-title>
+            </d-card-header>
+            <d-card-content>
+              <da-layout-row [daGutter]="[24, 24]">
+                <da-col-item [daSpan]="18" [daXs]="18">
+                  {{ service.description }}
+                </da-col-item>
+                <da-col-item [daSpan]="20" [daXs]="6">
+                  动作:
+                  <d-button (btnClick)="openBindServiceClusterDialog()">绑定集群</d-button>
+                  负责人:
+                  <d-avatar
+                    *ngFor="let user of userList"
+                    dCardAvatar
+                    [name]="user.username"
+                    [customText]="user.username"
+                    [isRound]="true"
+                    >
+                  </d-avatar>
+                  <d-button (btnClick)="openBindServiceUserDialog()">添加负责人</d-button>
+                </da-col-item>
+              </da-layout-row>
+
+              <br>
+              <da-col-item [daSpan]="24" [daXs]="24">
+                <div class="da-list-container">
+                  <div class="da-list-content">
+                    <d-card *ngFor="let cluster of clusterList" class="card-item">
+                      <a href="/cmdb/cluster/{{ cluster.ID }}">
+                        <d-card-header>
+                          <d-avatar
+                            dCardAvatar
+                            [name]="cluster.name"
+                            [round]="true"
+                            width="28"
+                            height="28">
+                          </d-avatar>
+                          <d-card-title>{{ cluster.name }}</d-card-title>
+                        </d-card-header>
+                        <d-card-content>
+                        {{ cluster.description }}
+                        </d-card-content>
+                      </a>
+                    </d-card>
+                  </div>
+                </div>
+              </da-col-item>
+            </d-card-content>
+          </d-card>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

@@ -1,0 +1,363 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.service.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.service.config.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+  </div>
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24,24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-list-container">
+          <h3>应用名: {{ service.name }}</h3>
+          <div class="da-list-content">
+            <d-tabs
+              [type]="'tabs'" [(activeTab)]="activeTabID" (activeTabChange)="activeTabChange($event)">
+              <d-tab id="appMacros" title="应用配置参数" tabId="appMacros">
+                <ng-template dTabContent>
+                  <form
+                    dForm
+                    [layout]="'columns'"
+                    autocomplete="off">
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'这里填APP的资源位置'">App资源位置</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="appSourceLocation"
+                          placeholder="app资源位置，发布前的资源准备或者编译所需要的资源放置的位置"
+                          [(ngModel)]="data.appSourceLocation">
+                      </d-form-control>
+                    </d-form-item>
+
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'这里填APP的发布（产物）位置'">App实际工作目录</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="appLocation"
+                          placeholder="app产物的路径，用于发布等， start脚本执行目录"
+                          [(ngModel)]="data.appLocation">
+                      </d-form-control>
+                    </d-form-item>
+
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'这里日志路径'">日志路径</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="logLocation"
+                          placeholder="执行发布停止等脚本产生的日志位置"
+                          [(ngModel)]="data.logLocation">
+                      </d-form-control>
+                    </d-form-item>
+
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'请完善获取版本的脚本，如果为空，版本将会显示未知'">版本脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="versionScript"
+                          placeholder="编写获取版本脚本"
+                          [(ngModel)]="data.versionScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'各种可执行的脚本'">部署脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="deployScript"
+                          placeholder="请编写部署脚本内容，如果没有将没有部署阶段"
+                          [(ngModel)]="data.deployScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'启动脚本'">启动脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="startScript"
+                          placeholder="请填写启动脚本名"
+                          [(ngModel)]="data.startScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'停止脚本内容'">停止脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="stopScript"
+                          placeholder="停止脚本名"
+                          [(ngModel)]="data.stopScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'重启脚本名'">重启脚本名</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="restartScript"
+                          placeholder="重启脚本名"
+                          [(ngModel)]="data.restartScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'软重启脚本内容'">软重启脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="reloadScript"
+                          placeholder="软重启脚本内容"
+                          [(ngModel)]="data.reloadScript">
+                      </d-form-control>
+                    </d-form-item>
+                    <d-form-item>
+                      <d-form-label
+                        [required]="true"
+                        [hasHelp]="true"
+                        [helpTips]="'用于检查是否成功并callback的'">检查脚本内容</d-form-label>
+                      <d-form-control class="form-control-width">
+                        <input
+                          dTextInput
+                          autocomplete="off"
+                          name="checkScript"
+                          placeholder="检查脚本内容"
+                          [(ngModel)]="data.checkScript">
+                      </d-form-control>
+                    </d-form-item>
+                  </form>
+                  <d-form-operation>
+                    <d-button (btnClick)="addServiceConfig()" bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px !important">Submit</d-button>
+                    <d-button bsStyle="common" circled="true">Cancel</d-button>
+                  </d-form-operation>
+                </ng-template>
+              </d-tab>
+              <d-tab id="appArrange" tabId="appArrange" title="发布编排">
+                <ng-template dTabContent>
+                  <h5>已经存在的编排</h5>
+                  <d-data-table
+                    #datatable
+                    [dataSource]="listData"
+                    [borderType]="'normal'"
+                    [size]="'normal'"
+                    >
+                    <d-column field="ID" header="ID">
+                      <d-cell>
+                        <ng-template let-cellItem="cellItem">
+                          {{ cellItem }}
+                        </ng-template>
+                      </d-cell>
+                    </d-column>
+                    <d-column field="name" header="编排名">
+                      <d-cell>
+                        <ng-template let-cellItem="cellItem">
+                          {{ cellItem }}
+                        </ng-template>
+                      </d-cell>
+                    </d-column>
+                    <d-column field="value" header="编排配置">
+                      <d-cell>
+                        <ng-template let-cellItem="cellItem">
+                          {{ cellItem }}
+                        </ng-template>
+                      </d-cell>
+                    </d-column>
+
+                    <d-column field="description" header="描述信息">
+                      <d-cell>
+                        <ng-template let-cellItem="cellItem">
+                          {{ cellItem }}
+                        </ng-template>
+                      </d-cell>
+                    </d-column>
+                    <d-column field="created_by" header="创建人">
+                      <d-cell>
+                        <ng-template let-cellItem="cellItem">
+                          {{ cellItem }}
+                        </ng-template>
+                      </d-cell>
+                    </d-column>
+                  </d-data-table>
+                  <hr>
+                  <h5>添加新编排</h5>
+                  <d-form-item>
+                    <d-form-label>编排显示名字</d-form-label>
+                    <d-form-control class="form-control-width">
+                      <input
+                        dTextInput
+                        name="name"
+                        placeholder="请填写编排名字"
+                        autocomplete="off"
+                        [(ngModel)]="arrange.name">
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-item>
+                    <d-form-label>编排名key</d-form-label>
+                    <d-form-control class="form-control-width">
+                      <input
+                        dTextInput
+                        name="key"
+                        placeholder="请填写编排key"
+                        autocomplete="off"
+                        [(ngModel)]="arrange.key">
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-item>
+                    <d-form-label>编排描述信息</d-form-label>
+                    <d-form-control class="form-control-width">
+                      <textarea
+                        dTextarea
+                        name="description"
+                        [(ngModel)]="arrange.description"
+                        autocomplete="off"
+                        resize="both"
+                        placeholder="一句话描述此编排"></textarea>
+                    </d-form-control>
+                  </d-form-item>
+
+                  <d-form-item>
+                    <d-form-label>编排剧本</d-form-label>
+                    <d-form-control class="form-control-width">
+                      <textarea
+                        dTextarea
+                        name="appTaskXml"
+                        autocomplete="off"
+                        [(ngModel)]="arrange.appTaskXml"
+                        resize="both"
+                        placeholder="请编排对应的发布任务"></textarea>
+                    </d-form-control>
+                  </d-form-item>
+
+                  <d-button (btnClick)="addAppArrange()" bsStyle="stress" class="mr-element-spacing" circled="true" style="margin-right: 4px !important">Submit</d-button>
+                  <d-button bsStyle="common" circled="true">Cancel</d-button>
+                </ng-template>
+              </d-tab>
+              <d-tab id="appHosts" title="主机选择" tabId="appHosts">
+                <ng-template dTabContent>
+                  <div class="da-list-container">
+                    <div class="da-list-header">
+                      <div class="da-common-search">
+                        <div class="da-right">
+                          <d-button
+                            (click)="batchAdd()"
+                            style="margin-left: 12px"
+                            >添加到Deploy Host列表</d-button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="da-list-content" dLoading [loading]="busy">
+                      <d-data-table
+                        #datatable
+                        [fixHeader]="true"
+                        [dataSource]="appData"
+                        [borderType]="'normal'"
+                        [size]="'normal'"
+                        [scrollable]="true">
+                        <d-column field="id" header="ID">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="product" header="产品">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="app" header="服务">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="hostname" header="主机名">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="ip" header="IP">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="os" header="操作系统">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                        <d-column field="description" header="描述信息">
+                          <d-cell>
+                            <ng-template let-cellItem="cellItem">
+                              {{ cellItem }}
+                            </ng-template>
+                          </d-cell>
+                        </d-column>
+                      </d-data-table>
+                    </div>
+                  </div>
+                </ng-template>
+              </d-tab>
+            </d-tabs>
+            </div>
+          </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>

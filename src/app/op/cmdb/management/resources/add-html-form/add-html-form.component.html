@@ -1,0 +1,55 @@
+<da-layout-row daGutter="[0, 0]">
+  <da-col-item [daStyle]="{ width: '300px', height: '300px'}">
+    <form
+    dForm
+    [labelAlign]="'end'"
+    style="margin: 20px auto">
+    <d-form-item>
+      <d-form-label [required]="true">label</d-form-label>
+      <d-form-control>
+        <input
+          dTextInput
+          autocomplete="off"
+          name="label"
+          placeholder="请输入表单显示名"
+          [(ngModel)]="defaultRowData.label" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">prop</d-form-label>
+      <d-form-control>
+        <input
+          dTextInput
+          autocomplete="off"
+          name="prop"
+          placeholder="请输入表单字段名"
+          [(ngModel)]="defaultRowData.prop" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">type</d-form-label>
+      <d-form-control>
+        <d-select
+          [options]="formSelectOptions"
+          [(ngModel)]="defaultRowData.type"
+          (ngModelChange)="checkRowData($event)"
+          name="type"
+          placeholder="请选择表单类型"
+          [allowClear]="true"
+          ></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item *ngIf="showSelectOptions">
+      <d-form-label [required]="true">options</d-form-label>
+      <d-form-control>
+        <input
+          dTextInput
+          autocomplete="off"
+          name="options"
+          placeholder="请输入选择项，以空格或逗号分隔"
+          [(ngModel)]="defaultRowData.options" />
+      </d-form-control>
+    </d-form-item>
+  </form>
+  </da-col-item>
+</da-layout-row>

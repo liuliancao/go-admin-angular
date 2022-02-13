@@ -1,0 +1,104 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '700px', height: '500px'}">
+    正在创建新资源
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto">
+      <d-form-item>
+        <d-form-label [required]="true">请选择资源类型</d-form-label>
+        <d-form-control>
+          <d-select
+            [options]="resourcesTypeList"
+            [(ngModel)]="data.data_json"
+            [multiple]="false"
+            [name]="'name'"
+            placeholder="请选择资源类型"
+            [filterKey]="'nickname'"
+            [isSearch]="true"
+            (ngModelChange)="renderForm($event)"
+            [dValidateRules]="[{ required: true }]">
+          </d-select>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]>资源名字</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="name"
+            placeholder="资源名，不能重复"
+            [(ngModel)]="data.name" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label>描述信息</d-form-label>
+        <d-form-control>
+          <textarea
+            dTextarea
+            name="description"
+            [(ngModel)]="data.description"
+            placeholder="资源的描述信息可空">
+          </textarea>
+        </d-form-control>
+      </d-form-item>
+
+      <d-form-item *ngFor="let item of data.formConfig.items">
+        <d-form-label [required]="item.required">{{ item.label }}: </d-form-label>
+        <d-form-control [extraInfo]="item.extraInfo">
+          <input
+            dTextInput
+            [name]="item.prop"
+            [(ngModel)]="data.defaultRowData[item.prop]"
+            *ngIf="item.type === 'input'"
+            [dValidateRules]="item.rule"
+            [dValidateRules]="item.required ? item.rule : {}"
+            />
+          <textarea
+            [name]="item.prop"
+            [(ngModel)]="data.defaultRowData[item.prop]"
+            *ngIf="item.type === 'textarea'"
+            [dValidateRules]="item.rule"
+            [dValidateRules]="item.required ? item.rule : {}"
+            ></textarea>
+          <d-select
+            *ngIf="item.type === 'select'"
+            appendToBody
+            [options]="item.options"
+            [name]="item.prop"
+            [(ngModel)]="data.defaultRowData[item.prop]"
+            [dValidateRules]="item.required ? item.rule : []"
+          ></d-select>
+          <div
+            class="devui-input-group devui-dropdown-origin"
+            *ngIf="item.type === 'datePicker'"
+          >
+            <input
+              class="devui-input devui-form-control"
+              placeholder="y/MM/dd"
+              (click)="datePicker1.toggle()"
+              [name]="item.prop"
+              [(ngModel)]="data.defaultRowData[item.prop]"
+              autocomplete="off"
+              dDatepicker
+              appendToBody
+              #datePicker1="datepicker"
+              [dValidateRules]="item.required ? item.rule : []"
+            />
+            <div
+              *ngIf="selectedDate1"
+              class="devui-input-group-addon close-icon-wrapper"
+              (click)="datePicker1.clearAll()"
+            >
+              <i class="icon icon-close"></i>
+            </div>
+            <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
+              <i class="icon icon-calendar"></i>
+            </div>
+          </div>
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

@@ -1,0 +1,32 @@
+<da-layout-row [daGutter]="[0, 0]">
+  <da-col-item [daStyle]="{ width: '500px'}">
+    <form
+      dForm
+      [labelAlign]="'end'"
+      style="margin: 20px auto"
+    >
+      <d-form-item>
+        <d-form-label [required]="true">产品名称</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            autocomplete="off"
+            name="name"
+            placeholder="请输入产品名称"
+            [(ngModel)]="data.name" />
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">描述信息</d-form-label>
+        <d-form-control>
+          <input
+            dTextInput
+            name="description"
+            [(ngModel)]="data.description"
+            placeholder="产品描述信息"
+          />
+        </d-form-control>
+      </d-form-item>
+    </form>
+  </da-col-item>
+</da-layout-row>

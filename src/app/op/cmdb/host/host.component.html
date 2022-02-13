@@ -1,0 +1,146 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.host.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+    <!--div class="da-content-banner-title">
+      {{ "dashboard.cmdb.host.basicList.title" | translate }}
+    </div>
+    <div>{{ "dashboard.cmdb.host.basicList.description" | translate }}</div-->
+  </div>
+
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <div class="da-list-container">
+          <div class="da-list-header">
+            <d-search
+              style="width: 200px"
+              [size]="'sm'"
+              [(ngModel)]="keyword"
+              (searchFn)="onSearch()"
+              (ngModelChange)="onSearch()"
+              [autoFocus]="true"
+              class="inline"
+              >
+            </d-search>
+          </div>
+          <div class="hosts-content" dLoading [loading]="busy">
+            <d-data-table
+              #datatable
+              [dataSource]="hostsDataSource"
+              [borderType]="'normal'"
+              [size]="'sm'"
+              [resizeable]="true"
+              [tableLayout]="'auto'"
+              [scrollable]="true"
+              >
+              <d-column field="id" header="ID">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem" let-rowItem="rowItem">
+                    <d-button (btnClick)="openHostDetailDialog(rowItem)">{{ cellItem }}</d-button>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="htype" header="类型">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="hostname" header="主机名">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="os" header="系统">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    <d-tag [tag]="cellItem || '--'" [labelStyle]="'blue-w98'">{{cellItem}</d-tag>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="ip" header="IP">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    <span dTooltip bsStyle="common" [content]="cellItem" [position]="'bottom'">{{ cellItem }}</span>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+
+              <d-column field="clusters" header="集群">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    <d-tags [tags]="cellItem || '--'" [displayProperty]="'name'" [labelStyle]="'purple-w98'"></d-tags>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="product" header="产品">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem || "--" }}
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <!--d-column field="description" header="描述" [width]="'100px'">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    {{ cellItem || "--" }}
+                  </ng-template>
+                </d-cell>
+              </d-column-->
+              <d-column field="status" header="状态">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    <span  [ngClass]="{'hostbad': cellItem == 0, 'hostgood': cellItem == 1}">{{ status[cellItem] || "--" }}</span>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+              <d-column field="createdat" header="创建时间">
+                <d-cell>
+                  <ng-template let-cellItem="cellItem">
+                    <span>{{cellItem || "--" }}</span>
+                  </ng-template>
+                </d-cell>
+              </d-column>
+            </d-data-table>
+          </div>
+          <div class="da-list-footer">
+            <d-pagination
+              [size]="'sm'"
+              [total]="pager.total"
+              [(pageSize)]="pager.size"
+              [(pageIndex)]="pager.index"
+              [canViewTotal]="true"
+              [canChangePageSize]="true"
+              [canJumpPage]="true"
+              [maxItems]="5"
+              (pageIndexChange)="onPageChange($event)"
+              (pageSizeChange)="onSizeChange($event)">
+            </d-pagination>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>
+
+<!--ng-template #EditorTemplate>
+  <da-admin-form
+    [formConfig="formConfig"]
+    [formData]="formData"
+    (submitted)="onSubmitted($event)"
+    (canceled)="onCanceled($event)">
+  </da-admin-form>
+</ng-template-->

@@ -1,0 +1,87 @@
+<div class="da-list-wrap">
+  <div class="da-content-banner">
+    <d-breadcrumb>
+      <d-breadcrumb-item>
+        <a routerLink="/">{{ "dashboard.home.breadcrumb" | translate }}</a>
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+      <d-breadcrumb-item>
+        {{ "dashboard.cmdb.manage.resource.breadcrumb" | translate }}
+      </d-breadcrumb-item>
+    </d-breadcrumb>
+    <div class="da-content-banner-title">
+      {{ "dashboard.cmdb.manage.resource.basicList.title" | translate }}
+    </div>
+    <div>{{ "dashboard.cmdb.manage.resource.basicList.description" | translate }}</div>
+  </div>
+
+  <div class="da-content-wrapper">
+    <da-layout-row [daGutter]="[24,24]">
+      <da-col-item [daSpan]="10" [daXs]="2">
+        <d-button (btnClick)="openCreateResourceTypeDialog()">创建资源类型</d-button>
+      </da-col-item>
+      <da-col-item [daSpan]="10" [daXs]="10">
+        <d-button (btnClick)="openCreateResourceDialog()">创建资源</d-button>
+      </da-col-item>
+    </da-layout-row>
+
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <h3>资源类型</h3>
+        <div class="da-list-container">
+          <div class="da-list-content">
+            <d-card *ngFor="let rt of resourceTypeList" class="card-item">
+              <a href="/cmdb/resourcetype/{{ rt.ID }}">
+                <d-card-header>
+                  <d-avatar
+                    dCardAvatar
+                    [name]="rt.name"
+                    [round]="true"
+                    width="28"
+                    height="28">
+                  </d-avatar>
+                  <d-card-title>{{ rt.nickname }}</d-card-title>
+                </d-card-header>
+                <d-card-content>
+                  {{ rt.description }}
+                </d-card-content>
+              </a>
+            </d-card>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+    <da-layout-row [daGutter]="[24, 24]">
+      <da-col-item [daSpan]="24" [daXs]="24">
+        <h3>资源</h3>
+        <div class="da-list-container">
+          <div class="da-list-content">
+            <d-card *ngFor="let resource of resourceList" class="card-item">
+              <a href="/cmdb/resource/{{ resource.ID }}">
+                <d-card-header>
+                  <d-avatar
+                    dCardAvatar
+                    [name]="resource.name"
+                    [round]="true"
+                    width="28"
+                    height="28">
+                  </d-avatar>
+                  <d-card-title>{{ resource.nickname }}</d-card-title>
+                </d-card-header>
+                <d-card-content>
+                  {{ resource.description }}
+                  {{ resource.data_json }}
+                </d-card-content>
+              </a>
+            </d-card>
+          </div>
+        </div>
+      </da-col-item>
+    </da-layout-row>
+  </div>
+</div>
