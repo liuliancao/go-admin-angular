@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    opBackendUrl: 'http://op.liuliancao.com'
+    opBackendUrl: 'http://op.test.com'
 };
 
 /*

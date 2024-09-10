@@ -12,3 +12,5 @@ npm start
 
 后端部分在https://github.com/liuliancao/go-admin
 
+感兴趣可以参见 https://blog.liuliancao.com/posts/go-admin-demo/ 去部署和测试
+
